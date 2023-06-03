@@ -51,7 +51,7 @@ if __name__ == "__main__":
     parser.add_argument("--year", default=2017, type=int, help="Date of data acquisition")
     parser.add_argument("--buffer", default=20, type=int, help="Buffer of the tiles")
     parser.add_argument("--tile_size", default=160, type=int, help="Size of the tiles (squared tiles)")
-    parser.add_argument("--threshold", default=160, type=int, help="Threshold for cover of trees in the tiles")
+    parser.add_argument("--threshold", default=0, type=int, help="Threshold for cover of trees in the tiles")
     args = parser.parse_args()
 
     city = args.city
