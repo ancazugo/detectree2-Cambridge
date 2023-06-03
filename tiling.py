@@ -25,17 +25,21 @@ def tile_rgb_by_year(city='Cambridge', year=2017, buffer=20, tile_size=160, thre
     appends = str(tile_size) + "_" + str(buffer) + "_" + str(threshold)
     site_path = os.getenv('DATA_FOLDER') + f'/{city}/'
     img_dir = site_path + f'Aerial_RGB_25cm_{year}_32630/'
-    tiles_dir = site_path + f'tiles_0.25m_{year}_{appends}'
+    tiles_dir = site_path + f'tiles_0.25m_{year}_{appends}/'
     
     img_paths = list(Path(img_dir).glob('*.tif'))
     
     for i in range(len(img_paths)):
-
+        
+        t_1 = default_timer()
         # Read in the tiff file
         data = rasterio.open(str(img_paths[i]))
 
         # Tile RGB imagery
         tile_data(data, tiles_dir, buffer, tile_size, tile_size)
+        
+        t_2 = default_timer()
+        print(f"{(t_2 - t_1)/60.0} minutes for {str(img_paths[i])}")
         
     return len(img_paths)
         
