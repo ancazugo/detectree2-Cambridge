@@ -3,6 +3,7 @@ from datetime import date, datetime
 from pathlib import Path
 from argparse import ArgumentParser
 from timeit import default_timer
+from dotenv import load_dotenv
 
 # from detectron2.engine import DefaultPredictor
 from detectree2.preprocessing.tiling import tile_data_train, to_traintest_folders, tile_data
@@ -19,19 +20,17 @@ import rasterio
 # import geopandas as gpd
 
 def tile_rgb_by_year(city='Cambridge', year=2017, buffer=20, tile_size=160, threshold=0):
-    # Set up paths
-    site_path = str(Path(os.getenv('DATA_FOLDER'))) + f'/{city}/'
-    img_dir = site_path + f'Aerial_RGB_25cm_{year}_32630/'
-    tiles_dir = site_path + f'tiles_0.25m_{year}_{appends}/'
-    
-    appends = str(tile_size) + "_" + str(buffer) + "_" + str(threshold)
 
-    # Read in the tiff file
-    data = rasterio.open(str(img_dir + f'Aerial_RGB_25cm_{year}_32630.tif'))
+    # Set up paths
+    appends = str(tile_size) + "_" + str(buffer) + "_" + str(threshold)
+    site_path = os.getenv('DATA_FOLDER') + f'/{city}/'
+    img_dir = site_path + f'Aerial_RGB_25cm_{year}_32630/'
+    tiles_dir = site_path + f'tiles_0.25m_{year}_{appends}'
     
     img_paths = list(Path(img_dir).glob('*.tif'))
     
     for i in range(len(img_paths)):
+
         # Read in the tiff file
         data = rasterio.open(str(img_paths[i]))
 
@@ -56,6 +55,7 @@ if __name__ == "__main__":
     buffer = args.buffer
     tile_size  =args.tile_size
     threshold = args.threshold
+    load_dotenv()
     
     t_start = default_timer()
     
