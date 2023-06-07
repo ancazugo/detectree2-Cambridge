@@ -9,6 +9,7 @@ __pycache__/
 # R Files
 .Renviron
 .Rhistory
+.RData
 *.Rproj
 
 # Data Files
