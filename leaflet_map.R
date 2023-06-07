@@ -51,7 +51,7 @@ myMap <- myMap %>%
     overlayGroups = c("Trees"),
     options = layersControlOptions(collapsed = T)
   ) %>%
-  addMiniMap(toggleDisplay = T) %>%
+  addMiniMap(toggleDisplay = T, minimized = T) %>%
   addMeasure(
     position = "topright",
     primaryLengthUnit = "meters",
@@ -59,7 +59,7 @@ myMap <- myMap %>%
     activeColor = "#3D535D",
     completedColor = "#7D4479") %>%
   addMouseCoordinates() %>% 
-  leafem::addLogo(img = "data/QR.png", url = "https://ancazugo.github.io/detectree2-Cambridge")
+  addLogo(img = "data/QR.png", url = "https://ancazugo.github.io/detectree2-Cambridge", src = 'local')
   
 # Print the map
 myMap
