@@ -59,7 +59,8 @@ myMap <- myMap %>%
     activeColor = "#3D535D",
     completedColor = "#7D4479") %>%
   addMouseCoordinates() %>% 
-  addLogo(img = "data/QR.png", url = "https://ancazugo.github.io/detectree2-Cambridge", src = 'local')
+  addLogo(img = "images/QR.png", url = "https://ancazugo.github.io/detectree2-Cambridge", src = 'local', position = 'bottomleft',
+          width = 100, height = 100)
   
 # Print the map
 myMap
