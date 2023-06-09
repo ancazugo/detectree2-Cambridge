@@ -9,25 +9,18 @@ library(htmlwidgets)
 # Load polygon data
 polygonData <- read_sf("data/dandy-sun-104_crowns.geojson")
 
+provider_options <- tileOptions(minZoom = 14)
 # Create a leaflet map object
 myMap <- leaflet() %>%
-  setView(lng = 0.12187521791306695, lat = 52.20412436973221, zoom = 14) %>% # Set initial map view
-  addTiles(urlTemplate = "https://api.mapbox.com/styles/v1/ancazugo/cli9ibqvv02td01pn4mgib4qv/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYW5jYXp1Z28iLCJhIjoiY2w0NHJqZngyNTBteDNmcG5iM3ZsbDQyNCJ9.6cVqIepyKP7oNzV0RqzkMA",
-           group = 'Antique') %>% 
-  addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}", group = "Google") %>% 
-  addTiles(group = "OSM") #%>% # Add default base layer
+  setView(lng = 0.12187521791306695, lat = 52.20412436973221, zoom = 14, options = leafletOptions(minZoom = 14)) %>% # Set initial map view
+  setMaxBounds(0.07596, 52.22938, 0.16986, 52.18967) %>% 
+  addTiles(urlTemplate = paste("https://api.mapbox.com/styles/v1/ancazugo/cli9ibqvv02td01pn4mgib4qv/tiles/256/{z}/{x}/{y}@2x?access_token=", Sys.getenv('MAPBOX_TOKEN')),
+           group = 'Antique', options = provider_options) %>% 
+  addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}", group = "Google", options = provider_options) %>% 
+  addTiles(group = "OSM", options = provider_options) #%>% # Add default base layer
   # addProviderTiles("Stamen.Toner", group = "Stamen") %>% # Add Stamen Toner base layer
   # addProviderTiles("CartoDB.Positron", group = "Positron") %>% # Add CartoDB Positron base layer
   # addProviderTiles("Esri.WorldImagery", group = "Esri Image")
-
-# myMap <- myMap %>%
-#   addProviderTiles(
-#     provider = "MapBox",
-#     options = providerTileOptions(
-#       id = "https://api.mapbox.com/styles/v1/ancazugo/cli9ibqvv02td01pn4mgib4qv/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYW5jYXp1Z28iLCJhIjoiY2w0NHJqZngyNTBteDNmcG5iM3ZsbDQyNCJ9.6cVqIepyKP7oNzV0RqzkMA",
-#       accessToken = Sys.getenv('MAPBOX_TOKEN')
-#     )
-#   )
 
 # Add polygon layer
 myMap <- myMap %>%
@@ -38,7 +31,7 @@ myMap <- myMap %>%
 
 myMap <- myMap %>%
   addEasyButton(easyButton(
-    icon="fa-globe", title="Zoom to Level 14",
+    icon="fa-globe", title="Back to overview",
     onClick=JS("function(btn, map){ map.setZoom(14); }"))) %>%
   addEasyButton(easyButton(
     icon="fa-crosshairs", title="Locate Me",
@@ -51,7 +44,7 @@ myMap <- myMap %>%
     overlayGroups = c("Trees"),
     options = layersControlOptions(collapsed = T)
   ) %>%
-  addMiniMap(toggleDisplay = T, minimized = T) %>%
+  # addMiniMap(toggleDisplay = T, minimized = T) %>%
   addMeasure(
     position = "topright",
     primaryLengthUnit = "meters",
