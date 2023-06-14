@@ -9,8 +9,8 @@ from detectron2.engine import DefaultPredictor
 # from detectree2.preprocessing.tiling import tile_data_train, to_traintest_folders, tile_data
 from detectree_addons import predict_on_data
 # from detectree2.models.predict import predict_on_data
-from detectree2.models.train import MyTrainer, setup_cfg, register_train_data, remove_registered_data, predictions_on_data, combine_dicts, get_tree_dicts, load_json_arr
-from detectree2.models.outputs import project_to_geojson, stitch_crowns, clean_crowns, to_eval_geojson, clean_predictions
+from detectree2.models.train import MyTrainer, setup_cfg#, register_train_data, remove_registered_data, predictions_on_data, combine_dicts, get_tree_dicts, load_json_arr
+from detectree2.models.outputs import project_to_geojson, stitch_crowns, clean_crowns#, to_eval_geojson, clean_predictions
 # from detectree2.models.evaluation import site_f1_score2
 # from detectron2.utils.visualizer import Visualizer
 # from detectron2.evaluation.coco_evaluation import instances_to_coco_json
