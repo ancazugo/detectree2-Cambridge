@@ -11,8 +11,7 @@
 #SBATCH --mem=32000
 
 # executables
-module load jaspy
+conda activate detectree2-env
 nvidia-smi
 
-# Unet, Binary, Angle
 python training.py

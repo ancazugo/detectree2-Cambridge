@@ -13,10 +13,9 @@ import geopandas as gpd
 def train_sweep(site_path, data_name, model_i):
 
     # Set up input paths
-    site_path = "Cambridge/0.25m_160_20_0_train/"
+    site_path = os.getenv('DATA_FOLDER') + site_path
     crown_path = site_path + "crowns/tiles_0.25m_160_20_0_train_crowns.shp"
     rgb_path = site_path + "rgb/"
-    data_name = 'Cambridge_25cm_2017'
     train_dir = site_path + "train/"
 
 
