@@ -6,4 +6,6 @@
 #SBATCH --output %j.out
 #SBATCH --error %j.err
 
-python merge_tiffs.py
+# python merge_tiffs.py0
+conda activate detectree2-env
+python stitch_crowns.py
